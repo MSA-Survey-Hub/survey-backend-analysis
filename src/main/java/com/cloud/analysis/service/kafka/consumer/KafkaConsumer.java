@@ -49,6 +49,8 @@ public class KafkaConsumer {
         System.out.println(String.format("question_List: %s", question_list));
         System.out.println(String.format("survey_info: %s", survey_info));
 
+
+        analysisService.InsertSurveyAnalysisOption(question_list,(Integer)survey_info.get("surId"));
         analysisService.SurveyCntUpdate(survey_info);
         analysisService.SurveyCategoryUpdate(survey_info);
 

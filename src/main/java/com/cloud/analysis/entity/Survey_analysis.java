@@ -13,21 +13,25 @@ import java.time.LocalDateTime;
 @Data
 public class Survey_analysis {
     @Id
-    @Column(name = "analysis_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pk_id", nullable = false)
+    private Integer pkId;
+
+    @Column(name = "analysis_id")
     private Integer analysisId;
 
     @Column(name = "sur_id", nullable = false)
     private Integer surveyId;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String subject;
 
-    @Column(name = "reg_dt", nullable = false)
+    @Column(name = "reg_dt")
     private LocalDateTime regDt;
 
-    @Column(name = "reg_id", nullable = false, length = 20)
+    @Column(name = "reg_id",length = 20)
     private String regId;
 
-    @Column(nullable = false)
+    @Column()
     private Integer type;
 }

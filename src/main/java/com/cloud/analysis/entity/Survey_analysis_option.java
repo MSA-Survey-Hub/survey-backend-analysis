@@ -14,12 +14,15 @@ import javax.persistence.*;
 @Entity
 public class Survey_analysis_option {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_id", nullable = false)
     private Integer optionId;
 
-    @ManyToOne
-    @JoinColumn(name = "analysis_id")
-    private Survey_analysis analysisId;
+    @Column(name = "analysis_id")
+    private Integer analysisId;
+
+    @Column(name = "survey_id", nullable = false)
+    private Integer surveyId;
 
     @Column(name = "option_name", nullable = false)
     private String optionName;

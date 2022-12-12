@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "survey-service",url="210.109.61.78:9000/survey-service", configuration = Config.class)
+@FeignClient(name = "survey-service",url="localhost:9000/survey-service", configuration = Config.class)
 public interface SurveyServiceClient {
     @PostMapping(value = "/v1/survey/vulgarismInsert")
     void vulgarismInsert(@RequestBody Vulgarism_DTO vulgarismDTO);

@@ -30,6 +30,8 @@ public interface AnalysisService {
 
     void InsertVulgarism(int surID, boolean InfoYn, boolean QuestionYn);
 
+    void InsertSurveyAnalysisOption(List<Map<String,Object>> question_list, Integer surId);
+
     Map<String, Object> CheckVulgarism(Map<String,Object> survey_info, List<Map<String,Object>> question_list);
 
 

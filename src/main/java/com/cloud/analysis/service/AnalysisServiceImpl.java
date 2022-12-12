@@ -2,6 +2,7 @@ package com.cloud.analysis.service;
 
 import com.cloud.analysis.client.SurveyServiceClient;
 import com.cloud.analysis.client.VulgarismServiceClient;
+import com.cloud.analysis.dto.Survey_analysis_option_DTO;
 import com.cloud.analysis.dto.User.UserDTO;
 import com.cloud.analysis.dto.Vulgarism_DTO;
 import com.cloud.analysis.entity.Platform_analysis_option;
@@ -245,9 +246,61 @@ public class AnalysisServiceImpl implements AnalysisService {
         System.out.println("Data = " + Data);
 
         return Data;
-
     };
 
+    @Override
+    public void InsertSurveyAnalysisOption(List<Map<String, Object>> question_list,Integer surId){
+        int analysisId = 0;
 
+        for (Map<String,Object> question : question_list) { // 향상된 for문(for-each)
+            if(!question.get("questionType").toString().equals("Sub")){
+                System.out.println("!!!!!!!!!!!!!!!!!!!!   question.get(\"questionType\").toString() = " + question.get("questionType").toString());
+                ++analysisId;
+                List<Map<String,Object>> optionList = (List<Map<String,Object>>)question.get("optionList");
+                int finalAnalysisId = analysisId;
 
+                Insert_analysis(question,finalAnalysisId,surId);
+                optionList.forEach((option)->{
+                            System.out.println("> analysisId = " + finalAnalysisId);
+                            System.out.println("> optionNumber = " + option.get("optionOrder"));
+                            Insert_option(option,finalAnalysisId,surId);
+
+//                            Survey_analysis_option survey_analysis_option = new Survey_analysis_option().builder()
+//                                    .optionId((Integer) option.get("optionOrder"))
+//                                    .optionName(question.get("content").toString())
+//                                    .value(0)
+//                                    .analysisId(analysis)
+//                                    .surveyId((Integer)question.get("surId"))
+//                                    .build();
+//                            surveyAnalysisOptionRepository.save(survey_analysis_option);
+                        }
+                );
+            }
+        }
+    }
+
+    public void Insert_option(Map<String, Object> option,Integer analysis, Integer surId){
+        Survey_analysis_option survey_analysis_option = new Survey_analysis_option().builder()
+                .optionName(option.get("optionName").toString())
+                .value(0)
+                .analysisId(analysis)
+                .surveyId(surId)
+                .build();
+        surveyAnalysisOptionRepository.save(survey_analysis_option);
+    }
+
+    public void Insert_analysis(Map<String, Object> question,Integer analysis, Integer surId){
+        Survey_analysis survey_analysis = new Survey_analysis().builder()
+                .analysisId(analysis)
+                .subject(question.get("content").toString())
+                .surveyId(surId)
+
+//                .subject()
+//                .optionName(question.get("content").toString())
+//                .value(0)
+//                .analysisId(analysis)
+//                .surveyId(surId)
+                .build();
+        surveyAnalysisRepository.save(survey_analysis);
+    }
 }
