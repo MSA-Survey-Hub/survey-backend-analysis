@@ -8,12 +8,12 @@ import com.cloud.analysis.entity.Platform_analysis_option;
 import com.cloud.analysis.entity.Survey_analysis;
 import com.cloud.analysis.entity.Survey_analysis_option;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public interface AnalysisService {
-    List<Survey_analysis_option> getSurveyAnalysisList(Integer analysisId, Integer surveyId);
+
+    Map<Object,Object> getSurveyAnalysisOptionList(Integer analysisId, Integer surveyId);
     List<Platform_analysis_option> getPlatformAnalysisList(Integer surId);
 
     List<Object> getTypeSubjectList(Integer surveyId);

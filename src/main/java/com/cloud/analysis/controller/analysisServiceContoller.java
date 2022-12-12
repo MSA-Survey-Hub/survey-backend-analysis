@@ -24,9 +24,10 @@ public class analysisServiceContoller {
 
     // 설문조사 피설문자 통계 조회
     @RequestMapping(value = "/survey_analysis", method = RequestMethod.POST)
-    public List<Survey_analysis_option> getSurveyAnalysisList(@RequestParam (value = "analysis_Id") int analysisId, @RequestParam (value = "sur_id") int surveyId) {
-        List<Survey_analysis_option> allSurveyAnalysisList = analysisService.getSurveyAnalysisList(analysisId,surveyId);
-        return allSurveyAnalysisList;
+    public Map<Object,Object> getSurveyAnalysisList(@RequestParam (value = "analysis_Id") int analysisId, @RequestParam (value = "sur_id") int surveyId) {
+        Map<Object,Object> allSurveyAnalysisOptionList = analysisService.getSurveyAnalysisOptionList(analysisId,surveyId);
+
+        return allSurveyAnalysisOptionList;
     }
 
     // 플랫폼 통계 조회

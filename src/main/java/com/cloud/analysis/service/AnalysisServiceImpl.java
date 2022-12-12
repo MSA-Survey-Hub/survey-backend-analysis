@@ -2,7 +2,6 @@ package com.cloud.analysis.service;
 
 import com.cloud.analysis.client.SurveyServiceClient;
 import com.cloud.analysis.client.VulgarismServiceClient;
-import com.cloud.analysis.dto.Survey_analysis_option_DTO;
 import com.cloud.analysis.dto.User.UserDTO;
 import com.cloud.analysis.dto.Vulgarism_DTO;
 import com.cloud.analysis.entity.Platform_analysis_option;
@@ -41,10 +40,17 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Autowired
     VulgarismServiceClient vulgarismServiceClient;
 
+
     @Override
-    public List<Survey_analysis_option> getSurveyAnalysisList(Integer analysisId,Integer surveyId) {
-        List<Survey_analysis_option> surveyAnalysisList = surveyAnalysisRepository.findSurveyAnalysisByColumn(analysisId,surveyId);
-        return surveyAnalysisList;
+    public Map<Object,Object> getSurveyAnalysisOptionList(Integer analysisId, Integer surveyId) {
+        List<Survey_analysis_option> surveyAnalysisOptionList = surveyAnalysisRepository.findSurveyAnalysisOptionByColumn(analysisId,surveyId);
+        List<Survey_analysis> surveySubject = surveyAnalysisRepository.findSurveyAnalysisByColumn(analysisId,surveyId);
+        Map<Object,Object> map = new HashMap<>();
+        map.put("option", surveyAnalysisOptionList);
+        map.put("subject", surveySubject);
+        return map;
+
+//        return surveyAnalysisOptionList;
     }
 
     @Override
