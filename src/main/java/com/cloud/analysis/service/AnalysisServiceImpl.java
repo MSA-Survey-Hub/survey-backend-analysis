@@ -259,7 +259,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         int analysisId = 0;
 
         for (Map<String,Object> question : question_list) { // 향상된 for문(for-each)
-            if(!question.get("questionType").toString().equals("Sub")){
+            if(question.get("questionType").toString().equals("NumOnly")||question.get("questionType").toString().equals("NumMul")){
                 System.out.println("!!!!!!!!!!!!!!!!!!!!   question.get(\"questionType\").toString() = " + question.get("questionType").toString());
                 ++analysisId;
                 List<Map<String,Object>> optionList = (List<Map<String,Object>>)question.get("optionList");
