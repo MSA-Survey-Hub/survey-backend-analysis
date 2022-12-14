@@ -54,3 +54,5 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 #      defaultZone: http://210.109.61.200:30061/eureka
+
+#CICD TEST
